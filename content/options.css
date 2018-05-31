@@ -1,6 +1,48 @@
-button {
-    height: 30px;
-    width: 30px;
-    outline: none;
-    margin: 10px;
-  }
+body{
+  margin: 0px !important;
+}
+div.header{
+  background-color: rgb(204, 204, 204);
+  height:200px;
+}
+
+img.profile-img{
+  width: 150px;
+  margin-top: 105px;
+  margin-left: 80px;
+}
+
+button.edit{
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  background-color: rgb(255, 208, 91);
+  border: 0px;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  right: 30px;
+  top: 165px;
+}
+
+button.edit:hover{
+  background-color: rgb(251, 197, 64);
+  cursor: pointer;
+}
+button.edit:active{
+  background-color: rgb(247, 184, 31);
+  outline: none;
+}
+button.edit:focus{
+  outline: none;
+}
+
+label.title{
+  font-size: 52px;
+  position: absolute;
+  top: 143px;
+  left: 244px;
+  font-weight: 400;
+  font-family: inherit;
+  color: rgb(0, 0, 0);
+}

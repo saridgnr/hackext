@@ -24,12 +24,14 @@ body{
   .btn:focus{
     outline: none;
   }
+  .btn:visited{
+    background-color: brown;
+  }
 
 .btn_container{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 22px;
 }
 
 span.btn-info{
