@@ -3,7 +3,7 @@ var isIverted = false;
 
 const descriptions = {
     textSizeMessage: "Change the size of the text according to your selection",
-    ReadContentMessage: "Get your auditory output devices o read the highlighted text",
+    ReadContentMessage: "Get your auditory output devices to read the highlighted text",
     invertColorsMessage: "Invert the colors to seethe sites better",
     profileMessage: "Define your personal profile of all our available features",
     informationMessage: "Get all of the neccessary information about our extension",
@@ -17,7 +17,12 @@ function displayInfo(messageName) {
     displayedTextBox.innerText = descriptions[messageName];
 }
 
-(function initiateOnHovers() {
+function deleteDescriptiion() {
+    let displayedTextBox = document.getElementById("info_text");
+    displayedTextBox.innerText = "Hover over the buttons to see what they do.\n Descriptions will appear here.";
+}
+
+(function initiatePopupButtonDescriptions() {
     let formatSize = document.getElementById('format-size');
     let volume = document.getElementById('volume');
     let invert = document.getElementById('invert');
@@ -31,6 +36,13 @@ function displayInfo(messageName) {
     profile.onmouseenter = (function() {displayInfo('profileMessage')});
     mouse.onmouseenter = (function() {displayInfo('mouseVibrationMessage')});
     info.onmouseenter = (function() {displayInfo('informationMessage')});
+
+    formatSize.onmouseleave = (function() {deleteDescriptiion()});
+    volume.onmouseleave = (function() {deleteDescriptiion()});
+    invert.onmouseleave = (function() {deleteDescriptiion()});
+    profile.onmouseleave = (function() {deleteDescriptiion()});
+    mouse.onmouseleave = (function() {deleteDescriptiion()});
+    info.onmouseleave = (function() {deleteDescriptiion()});
 })();
 
 $(document).ready(function(){
