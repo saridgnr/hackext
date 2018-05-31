@@ -1,8 +1,8 @@
 {
-    "name": "Getting Started Example",
+    "name": "Rampa - Accessibility",
     "version": "1.0",
-    "description": "Build an Extension!",
-    "permissions": ["activeTab", "declarativeContent", "storage"],
+    "description": "The extension turns websites to accessible according to your chosen settings.",
+    "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false
