@@ -1,34 +1,5 @@
 var fontSize = 1;
 var isIverted = false;
-var accessibility = [
-    {
-        options: {
-            formatsize: true,
-            volume: false, 
-            invert: false, 
-            mousevibration: true,
-            monochrome: false
-        }
-    },
-    {
-        options: {
-            formatsize: false,
-            volume: true, 
-            invert: false, 
-            mousevibration: true,
-            monochrome: false
-        }
-    },
-    {
-        options: {
-            formatsize: false,
-            volume: false, 
-            invert: false, 
-            mousevibration: false,
-            monochrome: true
-        }
-    },
-]
 
 const descriptions = {
     textSizeMessage: "Change the size of the text according to your selection",

@@ -3,13 +3,13 @@
   <head>
       <meta http-equiv="Content-Security-Policy" content="script-src * data: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
       <link rel="stylesheet" type="text/css" href="content/options.css"/>
-      <script src="scripts/options.js"></script>
   </head>
   <body>
     <div class="header">
       <img class="profile-img" src="images/man.svg"/>
       <label class="title">Accessibility Profile</label>
-      <button class="edit" style="background-image: url('images/icons/edit.png')"></button>
+      <button class="edit" id="editButton" style="background-image: url('images/icons/edit.png')"></button>
+      <button class="edit" id="saveButton" style="background-image: url('images/icons/save.png')" hidden></button>
     </div>
     <div class="body">
       <span class="card-container">
@@ -17,15 +17,15 @@
             <label class="card-title">My Disabilities</label>
             <div class="options">
                 <label class="material-checkbox">
-                    <input type="checkbox" id="0">
+                    <input type="checkbox" id="SightLoss">
                     <span>Sight Loss</span>
                 </label>
                 <label class="material-checkbox">
-                    <input type="checkbox" id="1">
+                    <input type="checkbox" id="Blindness">
                     <span>Blindness</span>
                 </label>
                 <label class="material-checkbox">
-                    <input type="checkbox" id="2">
+                    <input type="checkbox" id="ColorBlindness">
                     <span>Color Blindness</span>
                 </label>
             </div>
@@ -34,5 +34,8 @@
         </div>
       </span>
     </div>
+
+    <script src="scripts/jquery-3.3.1.js"></script>   
+    <script src="scripts/options.js"></script>
   </body>
 </html>
