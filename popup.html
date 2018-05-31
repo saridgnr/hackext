@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="content/popup.css">
+      <meta http-equiv="Content-Security-Policy" content="script-src * data: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval';">
+      <link rel="stylesheet" type="text/css" href="content/popup.css">
     <script src="node_modules/alertifyjs/build/alertify.min.js"></script>
     <link rel="stylesheet" href="node_modules/alertifyjs/build/css/alertify.min.css" />
     <link rel="stylesheet" href="node_modules/alertifyjs/build/css/themes/default.min.css" />
@@ -42,5 +43,6 @@
       </span>
     </div>
     <script src="scripts/popup.js"></script>
+    <script src="scripts/profileAlert.js"></script>
   </body>
 </html>
