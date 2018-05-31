@@ -13,15 +13,11 @@ $(document).ready(function(){
     };
 });
 
-infoElem.onclick = function(){
+let profileBtn = document.getElementById('profile');
+
+profileBtn.onclick = function(){
     let color = "#F0F8FF"; 
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.executeScript(
-            tabs[0].id,
-            {code: 'document.body.style.backgroundColor = "' + color + '";'});
-      });
-  
-      //alertify.alert('Ready!');
+    chrome.tabs.create({url: "chrome-extension://ibnnncllgjfgllpeajodbdkfiajdgaod/options.html"});
   };
 
 
@@ -109,7 +105,7 @@ infoElem.onclick = function(){
 //     }
 // };
 
-// let infoElem = document.getElementById('info');
+let infoElem = document.getElementById('info');
 
 // infoElem.onclick = function () {
 //     let test = chrome.tabs.getCurrent(function () {
