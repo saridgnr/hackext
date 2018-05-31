@@ -13,6 +13,16 @@ $(document).ready(function(){
     };
 });
 
+infoElem.onclick = function(){
+    let color = "#F0F8FF"; 
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.executeScript(
+            tabs[0].id,
+            {code: 'document.body.style.backgroundColor = "' + color + '";'});
+      });
+  
+      //alertify.alert('Ready!');
+  };
 
 
 // // let changeColor = document.getElementById('changeColor');

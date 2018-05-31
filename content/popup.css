@@ -1,5 +1,5 @@
 body{
-  width: 220px;
+  width: 260px;
   padding: 5px;
 }
 
@@ -31,3 +31,16 @@ body{
   justify-content: space-between;
   margin-bottom: 22px;
 }
+
+span.btn-info{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+  span.btn-info>label{
+    margin: auto;
+    font-size: small;
+  }
+  span.btn-info>button{
+    margin: auto;
+  }
