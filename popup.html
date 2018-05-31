@@ -8,20 +8,38 @@
   </head>
   <body>
     <div class="btn_container">
-      <button class="btn" id="format-size" 
-      style="background-image: url('images/icons/format-size.svg')"></button>
-      <button class="btn" id="volume" 
-      style="background-image: url('images/icons/volume.svg')"></button>
-      <button class="btn" id="monochrome" 
-      style="background-image: url('images/icons/invert-colors.svg')"></button>
+      <span class="btn-info">
+        <button class="btn" id="format-size" title="Toggle page text size"
+                style="background-image: url('images/icons/format-size.svg')"></button>
+        <label>Text Size</label>
+      </span>
+      <span class="btn-info">
+        <button class="btn" id="volume" title="Toggle read out page content and hovered functions."
+                style="background-image: url('images/icons/volume.svg')"></button>
+        <label>Read Content</label>
+      </span>
+      <span class="btn-info">
+        <button class="btn" id="monochrome" title="Toggle page color monochrome" 
+                style="background-image: url('images/icons/invert-colors.svg')"></button>
+        <label>Invert Colors</label>
+      </span>
     </div>
     <div class="btn_container"> 
-      <button class="btn" id="profile" 
-      style="background-image: url('images/icons/person.svg')"></button>
-      <button class="btn" id="mouse" 
-      style="background-image: url('images/icons/mouse.svg')"></button>
-      <button class="btn" id="info"
-      style="background-image: url('images/icons/info.svg')"></button>
+      <span class="btn-info">
+        <button class="btn" id="profile" title="Watch your profile"
+                style="background-image: url('images/icons/person.svg')"></button>
+        <label>Profile</label>
+      </span>
+      <span class="btn-info">
+        <button class="btn" id="mouse" title="Toggle mouse vibration"
+                style="background-image: url('images/icons/mouse.svg')"></button>
+        <label>Mouse Vibration</label>
+      </span>
+      <span class="btn-info">
+        <button class="btn" id="info" title="Information about accessibility options"
+                style="background-image: url('images/icons/info.svg')"></button>
+        <label>Information</label>
+      </span>
     </div>
     <script src="scripts/popup.js"></script>
   </body>

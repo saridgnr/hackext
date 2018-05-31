@@ -60,8 +60,12 @@
 let infoElem = document.getElementById('info');
 
 infoElem.onclick = function(){
-  let test = chrome.tabs.getCurrent(function() {
-    alertify.alert('Ready!');
-  });
-  console.log(test);
-};  
+  let color = "#F0F8FF"; 
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.executeScript(
+          tabs[0].id,
+          {code: 'document.body.style.backgroundColor = "' + color + '";'});
+    });
+
+    //alertify.alert('Ready!');
+};
