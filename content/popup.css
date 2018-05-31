@@ -24,6 +24,9 @@ body{
   .btn:focus{
     outline: none;
   }
+  .btn:visited{
+    background-color: brown;
+  }
 
 .btn_container{
   width: 100%;
