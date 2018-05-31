@@ -1,0 +1,33 @@
+body{
+  width: 220px;
+  padding: 5px;
+}
+
+.btn {
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border-width: 0px;
+    background-color: rgb(239, 239, 239);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .btn:hover{
+    background-color: rgb(205, 205, 205);
+    cursor: pointer;
+  }
+  .btn:active{
+    background-color: rgb(180, 180, 190);
+    outline: none;
+  }
+  .btn:focus{
+    outline: none;
+  }
+
+.btn_container{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
