@@ -8,25 +8,15 @@ var options = {
     cursor: false
 };
 
+chrome.storage.sync.get(['volume', 'invert', 'monochrome', 'mouse', 'cursorSize'], function(result){
+    options.volume = result.volume;
+    options.invert = result.invert;
+    options.mono = result.monochrome;
+    options.mouse = result.mouse;
+    options.cursor = result.cursorSize;
+});
+
 $(document).ready(function () {
-    // chrome.storage.sync.get(['volume'], function(result){
-    //     options.volume = result.volume;
-    // });
-    // chrome.storage.sync.get(['invert'], function(result){
-    //     options.invert = result.invert;
-    // });
-    // chrome.storage.sync.get(['monochrome'], function(result){
-    //     options.mono = result.monochrome;
-    //     mono(null);
-    // });
-    // chrome.storage.sync.get(['mouse'], function(result){
-    //     options.mouse = result.mouse;
-    // });
-    // chrome.storage.sync.get(['cursorSize'], function(result){
-    //     options.cursor = result.cursorSize;
-    // });
-
-
     let fontBigger = document.getElementById('format-size-in');
     let fontSmaller = document.getElementById('format-size-out');
     let invertColors = document.getElementById('invert');
@@ -36,33 +26,53 @@ $(document).ready(function () {
     let volume = document.getElementById('volume');
     let info = document.getElementById('info');
     let cursor = document.getElementById('cursorbtn');
-
     let displayedTextBox = document.getElementById("info_text");
 
     findActiveButtons();
 
     function findActiveButtons(){
+
+
         if(options.info){
             info.classList.add('selected');
         }
+        else{
+            info.classList.remove('selected');
+        }
         if(options.cursor){
             cursor.classList.add('selected');
+        }
+        else{
+            cursor.classList.remove('selected');
         }
         if(options.invert){
             invertColors.classList.add('selected');
             invertColors.style.backgroundColor = "url(images/icons/base-invert.svg)";
         }
+        else{
+            invertColors.classList.remove('selected');
+        }
         if(options.mono){
             monochrome.classList.add('selected');
         }
+        else{
+            monochrome.classList.remove('selected');
+        }
         if(options.mouse){
             mouse.classList.add('selected');
+        }
+        else{
+            mouse.classList.remove('selected');
         }
         if(options.volume){
             volume.classList.add('selected');
             volume.style.backgroundImage = "url(images/icons/volume.svg)";
         }   
+        else{
+            volume.classList.remove('selected');
+        }
     }
+
     // Toggles the descrition for the extension's buttons on and off
     function toggleDesc() {
         let x = document.getElementById("description");
@@ -209,6 +219,11 @@ $(document).ready(function () {
 
     invertColors.onclick = function (element) {
         if (!options.invert) {
+            if (options.mono){
+                options.mono = false;
+                monochrome.classList.remove('selected');
+            }
+
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
@@ -241,16 +256,21 @@ $(document).ready(function () {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
-                    { code: 'document.body.style.filter = "grayscale(100%)";' });
+                    { code: 'document.body.style.filter = "grayscale(0%)";' });
             });
             monochrome.classList.remove('selected');
             options.mono = false;
         }
         else {
+            if(options.invert){
+                options.invert = false;
+                invertColors.classList.remove('selected');
+            }
+
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
-                    { code: 'document.body.style.filter = "grayscale(0%)";' });
+                    { code: 'document.body.style.filter = "grayscale(100%)";' });
             });
 
             monochrome.classList.add('selected');

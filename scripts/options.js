@@ -139,7 +139,7 @@ $(document).ready(function(){
     chrome.storage.sync.set({'volume': options.volume});
     chrome.storage.sync.set({'invert': options.invert});
     chrome.storage.sync.set({'mouse': options.mouse});
-    chrome.storage.sync.set({'monochrome': options.monochrome});
+    chrome.storage.sync.set({'monochrome': options.mono});
     chrome.storage.sync.set({'cursorSize': options.cursor});
   }
 
@@ -210,6 +210,12 @@ $(document).ready(function(){
       invertbtn.style.backgroundImage="url('images/icons/invert-colors.svg')";
     }
     else{
+      if (options.mono){
+        options.mono = false;
+        monobtn.style.backgroundColor="rgb(239, 239, 239)";
+        monolbl.innerText = "Monochrome: " + options.mono;
+      }
+
       invertbtn.style.backgroundColor="rgb(247, 184, 31)";
       invertbtn.style.backgroundImage="url('images/icons/base-invert.svg')";
     }
@@ -224,6 +230,12 @@ $(document).ready(function(){
     }
     else{
       monobtn.style.backgroundColor="rgb(247, 184, 31)";
+
+      if (options.invert){
+        options.invert = false;
+        invertbtn.style.backgroundColor="rgb(239, 239, 239)";
+        invertlbl.innerText = "Invert Colors: " + options.invert;
+      }
     }
 
     monolbl.innerText = "Monochrome: " + options.mono;
