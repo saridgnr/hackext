@@ -1,11 +1,19 @@
-chrome.runtime.onInstalled.addListener(function () {
-  chrome.storage.sync.set({ color: '#3aa757' }, function () {
-    console.log("The color is green.");
-  });
-  chrome.storage.sync.set({ fontScale: 1 }, function () {
-    console.log('font scale is 1')
-  });
+var options = {
+  volume: false, 
+  invert: false, 
+  mouse: false,
+  mono: false,
+  cursor: false
+};
+
+chrome.storage.sync.get(['volume', 'invert', 'monochrome', 'mouse', 'cursorSize'], function(result){
+  options.volume = result.volume;
+  options.invert = result.invert;
+  options.mono = result.monochrome;
+  options.mouse = result.mouse;
+  options.cursor = result.cursorSize;
 });
+
 chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
   chrome.declarativeContent.onPageChanged.addRules([{
     conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -15,3 +23,4 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
     actions: [new chrome.declarativeContent.ShowPageAction()]
   }]);
 });
+

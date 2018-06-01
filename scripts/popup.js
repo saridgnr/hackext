@@ -7,24 +7,25 @@ var options = {
     cursor: false
 };
 
-chrome.storage.sync.get(['volume'], function(result){
-    options.volume = result.volume;
-});
-chrome.storage.sync.get(['invert'], function(result){
-    options.invert = result.invert;
-});
-chrome.storage.sync.get(['monochrome'], function(result){
-    options.mono = result.monochrome;
-});
-chrome.storage.sync.get(['mouse'], function(result){
-    options.mouse = result.mouse;
-});
-chrome.storage.sync.get(['cursorSize'], function(result){
-    options.cursor = result.cursorSize;
-});
-
 $(document).ready(function () {
-
+    chrome.storage.sync.get(['volume'], function(result){
+        options.volume = result.volume;
+    });
+    chrome.storage.sync.get(['invert'], function(result){
+        options.invert = result.invert;
+    });
+    chrome.storage.sync.get(['monochrome'], function(result){
+        options.mono = result.monochrome;
+        console.log(result.monochrome);
+        mono(null);
+    });
+    chrome.storage.sync.get(['mouse'], function(result){
+        options.mouse = result.mouse;
+    });
+    chrome.storage.sync.get(['cursorSize'], function(result){
+        options.cursor = result.cursorSize;
+    });
+    
     let fontBigger = document.getElementById('format-size-in');
     let fontSmaller = document.getElementById('format-size-out');
     let invertColors = document.getElementById('invert');
@@ -139,7 +140,12 @@ $(document).ready(function () {
 
 
     monochrome.onclick = function (element) {
-        if (!options.mono) {
+        mono(element);
+    };
+
+    function mono(element){
+        if (options.mono) {
+            console.log(options.mono);
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
@@ -147,7 +153,7 @@ $(document).ready(function () {
 
             });
 
-            options.mono = true;
+            options.mono = false;
         }
         else {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -157,7 +163,7 @@ $(document).ready(function () {
 
             });
 
-            options.mono = false;
+            options.mono = true;
         }
-    };
+    }
 });
