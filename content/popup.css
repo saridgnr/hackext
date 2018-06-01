@@ -1,5 +1,6 @@
 body{
   width: 330px;
+  cursor: url(http://www.rw-designer.com/cursor-view/97242-48.png),default;
 }
 .buttons{
   padding:5px;
@@ -26,7 +27,7 @@ body{
 }
   .btn:hover{
     background-color: rgb(205, 205, 205);
-    cursor: pointer;
+    cursor: url(http://www.rw-designer.com/cursor-view/97247-48.png),default;
   }
   .btn:active{
     background-color: rgb(180, 180, 190);

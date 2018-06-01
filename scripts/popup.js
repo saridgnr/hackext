@@ -40,7 +40,7 @@ $(document).ready(function () {
     let displayedTextBox = document.getElementById("info_text");
 
     findActiveButtons();
-    
+
     function findActiveButtons(){
         if(options.info){
             info.classList.add('selected');
@@ -250,6 +250,16 @@ $(document).ready(function () {
         }
         else{
             mouse.classList.remove('selected');
+        }
+    }
+
+    let mouseBigger = document.getElementById('cursorbtn');
+    let isMouseBig = false;
+    mouseBigger.onclick = function() {
+        if(isMouseBig) {
+            isMouseBig = false;
+        } else {
+            isMouseBig = true;
         }
     }
 });
