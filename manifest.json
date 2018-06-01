@@ -2,7 +2,7 @@
     "name": "Rampa - Accessibility",
     "version": "1.0",
     "description": "The extension turns websites to accessible according to your chosen settings.",
-    "permissions": ["activeTab", "declarativeContent", "storage", "tabs"],
+    "permissions": ["activeTab", "declarativeContent", "storage", "tabs", "http://*/*", "https://*/*"],
     "background": {
       "scripts": ["background.js"],
       "persistent": false

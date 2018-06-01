@@ -8,23 +8,7 @@ var options = {
 };
 
 $(document).ready(function () {
-    chrome.storage.sync.get(['volume'], function(result){
-        options.volume = result.volume;
-    });
-    chrome.storage.sync.get(['invert'], function(result){
-        options.invert = result.invert;
-    });
-    chrome.storage.sync.get(['monochrome'], function(result){
-        options.mono = result.monochrome;
-        console.log(result.monochrome);
-        mono(null);
-    });
-    chrome.storage.sync.get(['mouse'], function(result){
-        options.mouse = result.mouse;
-    });
-    chrome.storage.sync.get(['cursorSize'], function(result){
-        options.cursor = result.cursorSize;
-    });
+    // });
     
     let fontBigger = document.getElementById('format-size-in');
     let fontSmaller = document.getElementById('format-size-out');
