@@ -1,6 +1,5 @@
 body{
   width: 330px;
-  height: 300px;
 }
 .buttons{
   padding:5px;
@@ -18,6 +17,8 @@ body{
 
 .explanation {
   font-size: x-large;
+  padding-left: 1em;
+  padding-right: 0em;
 }
   .btn:hover{
     background-color: rgb(205, 205, 205);
