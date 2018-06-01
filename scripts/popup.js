@@ -3,9 +3,15 @@ var isIverted = false;
 var isMonochrome = false;
 
 $(document).ready(function () {
+
+    let fontBigger = document.getElementById('format-size-in');
+    let fontSmaller = document.getElementById('format-size-out');
+    let invertColors = document.getElementById('invert');
+    let monochrome = document.getElementById('monochrome');
+    let profileBtn = document.getElementById('profile');
     // Toggles the descrition for the extension's buttons on and off
     function toggleDesc() {
-        var x = document.getElementById("description");
+        let x = document.getElementById("description");
         if (x.style.display === "none") {
             x.style.display = "block";
         } else {
@@ -60,71 +66,77 @@ $(document).ready(function () {
         info.onclick = function () { toggleDesc() };
     })();
 
-    $(document).ready(function () {
-        let fontBigger = document.getElementById('format-size-in');
-        let invertColors = document.getElementById('invert');
-        let monochrome = document.getElementById('monochrome');
 
-        fontBigger.onclick = function (element) {
-            fontSize += 0.2;
+    fontBigger.onclick = function (element) {
+        fontSize += 0.2;
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                { code: 'document.body.style.fontSize = "' + fontSize + 'em ";' });
+
+        });
+    };
+
+    fontSmaller.onclick = function (element) {
+        fontSize -= 0.2;
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                { code: 'document.body.style.fontSize = "' + fontSize + 'em ";' });
+
+        });
+    };
+
+    profileBtn.onclick = function (element) {
+        let color = "#F0F8FF";
+        //chrome.tabs.create({ url: "chrome-extension://ibnnncllgjfgllpeajodbdkfiajdgaod/options.html" });
+        chrome.tabs.create({ 'url': "/options.html" });
+    };
+
+    invertColors.onclick = function (element) {
+        if (!isIverted) {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
-                    { code: 'document.body.style.fontSize = "' + fontSize + 'em ";' });
+                    { code: 'document.body.style.filter = "invert(100%)";' });
 
             });
-        };
 
-        invertColors.onclick = function (element) {
-            if (!isIverted) {
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.executeScript(
-                        tabs[0].id,
-                        { code: 'document.body.style.filter = "invert(100%)";' });
+            isIverted = true;
+        }
+        else {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    { code: 'document.body.style.filter = "invert(0%)";' });
 
-                });
+            });
 
-                isIverted = true;
-            }
-            else {
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.executeScript(
-                        tabs[0].id,
-                        { code: 'document.body.style.filter = "invert(0%)";' });
-
-                });
-
-                isIverted = false;
-            }
-        };
+            isIverted = false;
+        }
+    };
 
 
-        monochrome.onclick = function (element) {
-            if (!isMonochrome) {
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.executeScript(
-                        tabs[0].id,
-                        { code: 'document.body.style.filter = "grayscale(100%)";' });
+    monochrome.onclick = function (element) {
+        if (!isMonochrome) {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    { code: 'document.body.style.filter = "grayscale(100%)";' });
 
-                });
+            });
 
-                isMonochrome = true;
-            }
-            else {
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    chrome.tabs.executeScript(
-                        tabs[0].id,
-                        { code: 'document.body.style.filter = "grayscale(0%)";' });
+            isMonochrome = true;
+        }
+        else {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    { code: 'document.body.style.filter = "grayscale(0%)";' });
 
-                });
+            });
 
-                isMonochrome = false;
-            }
-        };
-
-        profileBtn.onclick = function () {
-            let color = "#F0F8FF";
-            chrome.tabs.create({ url: "chrome-extension://ibnnncllgjfgllpeajodbdkfiajdgaod/options.html" });
-        };
-    })
+            isMonochrome = false;
+        }
+    };
 });
