@@ -124,34 +124,61 @@ $(document).ready(function () {
     })();
 
     mouse.onclick = function (element) {
-
-
-        $("button").each(function () {
-            $(this).hover(function () {
-                $.get("http://jsonapi.org/examples/", function (data, status) {
-                    console.log(data);
+        if (!options.mouse) {
+            $("button").each(function () {
+                $(this).mouseenter(function () {
+                    $.get("http://localhost:3000/", function (data, status) {
+                        console.log(data);
+                    });
                 });
             });
-        });
 
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.tabs.executeScript(
-                tabs[0].id,
-                {
-                    code: `let allbuttons = document.getElementsByTagName("a");
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    {
+                        code: `let allbuttons = document.getElementsByTagName("a");
+    
+                for (let i=0; i <  allbuttons.length; i++)  {
+                     allbuttons[i].addEventListener("mouseenter",function () {
+    
+                        let xhr = new XMLHttpRequest();
+                        xhr.open('GET', "http://localhost:3000/", true);
+                        xhr.send();
+                        console.log(xhr);
+                        
+                       });
+                }`});
 
-            for (var i=0, max = allbuttons.length; i < max; i++)  {
-                 allbuttons[i].addEventListener("mouseover",function () {
+            });
+        } else {
+            $("button").each(function () {
+                $(this).mouseenter(function () {
+                    // $.get("http://localhost:3000/", function (data, status) {
+                    //     console.log(data);
+                    // });
+                });
+            });
 
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('GET', "https://ipinfo.io/json", true);
-                    xhr.send();
-                    console.log(xhr);
-                    
-                   });
-            }`});
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    {
+                        code: `let allbuttons = document.getElementsByTagName("a");
+    
+                for (let i=0; i <  allbuttons.length; i++)  {
+                     allbuttons[i].addEventListener("mouseenter",function () {
+    
+                        // let xhr = new XMLHttpRequest();
+                        // xhr.open('GET', "http://localhost:3000/", true);
+                        // xhr.send();
+                        // console.log(xhr);
+                        
+                       });
+                }`});
 
-        });
+            });
+        }
     }
 
     fontBigger.onclick = function (element) {
@@ -199,7 +226,7 @@ $(document).ready(function () {
 
             });
             invertColors.classList.remove('selected');
-            invertColors.style.backgroundImage="url(images/icons/invert.svg)";
+            invertColors.style.backgroundImage="url(images/icons/invert-colors.svg)";
             options.invert = false;
         }
     };
