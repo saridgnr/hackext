@@ -43,4 +43,25 @@ chrome.tabs.onUpdated.addListener(function () {
         });
     }
 
+    if (options.mouse) {
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {
+                    code: `let allbuttons = document.getElementsByTagName("a");
+
+                for (let i=0; i <  allbuttons.length; i++)  {
+                 allbuttons[i].addEventListener("mouseenter",function () {
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', "http://localhost:3000/", true);
+                    xhr.send();
+                    console.log(xhr);
+                    
+                   });
+            }`});
+
+        });
+    }
+
 });
