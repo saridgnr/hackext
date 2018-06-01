@@ -193,9 +193,11 @@ $(document).ready(function(){
     options.volume = !options.volume;
     if (!options.volume){
       volumebtn.style.backgroundColor="rgb(239, 239, 239)";
+      volumebtn.style.backgroundImage="url('images/icons/volume-off.svg')";
     }
     else{
       volumebtn.style.backgroundColor="rgb(247, 184, 31)";
+      volumebtn.style.backgroundImage="url('images/icons/volume.svg')";
     }
 
     volumelbl.innerText = "Read Content: " + options.volume;
@@ -205,9 +207,11 @@ $(document).ready(function(){
     options.invert = !options.invert;
     if(!options.invert){
       invertbtn.style.backgroundColor="rgb(239, 239, 239)";
+      invertbtn.style.backgroundImage="url('images/icons/invert-colors.svg')";
     }
     else{
       invertbtn.style.backgroundColor="rgb(247, 184, 31)";
+      invertbtn.style.backgroundImage="url('images/icons/base-invert.svg')";
     }
 
     invertlbl.innerText = "Invert Colors: " + options.invert;

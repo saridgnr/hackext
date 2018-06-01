@@ -1,6 +1,27 @@
 var fontSize = 1;
-var isIverted = false;
-var isMonochrome = false;
+var options = {
+    volume: false, 
+    invert: false, 
+    mouse: false,
+    mono: false,
+    cursor: false
+};
+
+chrome.storage.sync.get(['volume'], function(result){
+    options.volume = result.volume;
+});
+chrome.storage.sync.get(['invert'], function(result){
+    options.invert = result.invert;
+});
+chrome.storage.sync.get(['monochrome'], function(result){
+    options.mono = result.monochrome;
+});
+chrome.storage.sync.get(['mouse'], function(result){
+    options.mouse = result.mouse;
+});
+chrome.storage.sync.get(['cursorSize'], function(result){
+    options.cursor = result.cursorSize;
+});
 
 $(document).ready(function () {
 
@@ -94,7 +115,7 @@ $(document).ready(function () {
     };
 
     invertColors.onclick = function (element) {
-        if (!isIverted) {
+        if (!options.invert) {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
@@ -102,7 +123,7 @@ $(document).ready(function () {
 
             });
 
-            isIverted = true;
+            options.invert = true;
         }
         else {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -112,13 +133,13 @@ $(document).ready(function () {
 
             });
 
-            isIverted = false;
+            options.invert = false;
         }
     };
 
 
     monochrome.onclick = function (element) {
-        if (!isMonochrome) {
+        if (!options.mono) {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
@@ -126,7 +147,7 @@ $(document).ready(function () {
 
             });
 
-            isMonochrome = true;
+            options.mono = true;
         }
         else {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -136,7 +157,7 @@ $(document).ready(function () {
 
             });
 
-            isMonochrome = false;
+            options.mono = false;
         }
     };
 });
