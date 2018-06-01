@@ -1,6 +1,17 @@
 var fontSize = 1;
 var isIverted = false;
 
+// Toggles the descrition for the extension's buttons on and off
+function toggleDesc() {
+    var x = document.getElementById("description");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
+// The descriptions for eah of the buttons in the extension 
 const descriptions = {
     textSizeMessage: "Change the size of the text according to your selection",
     ReadContentMessage: "Get your auditory output devices to read the highlighted text",
@@ -43,6 +54,8 @@ function deleteDescriptiion() {
     profile.onmouseleave = (function() {deleteDescriptiion()});
     mouse.onmouseleave = (function() {deleteDescriptiion()});
     info.onmouseleave = (function() {deleteDescriptiion()});
+
+    info.onclick = function() {toggleDesc()};
 })();
 
 $(document).ready(function(){
