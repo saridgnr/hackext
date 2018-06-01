@@ -44,7 +44,7 @@ $(document).ready(function () {
     const descriptions = {
         textSizeMessage: "Change the size of the text according to your selection",
         ReadContentMessage: "Get your auditory output devices to read the highlighted text",
-        invertColorsMessage: "Invert the colors to seethe sites better",
+        invertColorsMessage: "Invert the colors to see the sites better",
         profileMessage: "Define your personal profile of all our available features",
         informationMessage: "Get all of the neccessary information about our extension",
         mouseVibrationMessage: "Get your mouse to vibrate with the arduino component" +
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     function deleteDescriptiion() {
         let displayedTextBox = document.getElementById("info_text");
-        displayedTextBox.innerText = "Hover over the buttons to see what they do.\n Descriptions will appear here.";
+        displayedTextBox.innerText = "Hover for description!";
     }
 
     (function initiatePopupButtonDescriptions() {
