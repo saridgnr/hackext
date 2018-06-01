@@ -1,26 +1,28 @@
 var fontSize = 1;
 var isIverted = false;
+var isMonochrome = false;
 
-$(document).ready(function(){
+$(document).ready(function () {
     let fontBigger = document.getElementById('format-size');
     let invertColors = document.getElementById('invert');
+    let monochrome = document.getElementById('monochrome');
+
     fontBigger.onclick = function (element) {
         fontSize += 0.2;
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.executeScript(
                 tabs[0].id,
-                { code: 'document.body.style.fontSize = "' + fontSize + 'em";' });
-
+                { code: `document.body.style.fontSize = "${fontSize + 'em'}"` });               
         });
     };
 
-    invertColors.onclick = function(element){
-        if(!isIverted) {
+    invertColors.onclick = function (element) {
+        if (!isIverted) {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
                     tabs[0].id,
                     { code: 'document.body.style.filter = "invert(100%)";' });
-    
+
             });
 
             isIverted = true;
@@ -30,15 +32,39 @@ $(document).ready(function(){
                 chrome.tabs.executeScript(
                     tabs[0].id,
                     { code: 'document.body.style.filter = "invert(0%)";' });
-    
+
             });
 
             isIverted = false;
         }
     };
+
+
+    monochrome.onclick = function (element) {
+        if (!isMonochrome) {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    { code: 'document.body.style.filter = "grayscale(100%)";' });
+
+            });
+
+            isMonochrome = true;
+        }
+        else {
+            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                chrome.tabs.executeScript(
+                    tabs[0].id,
+                    { code: 'document.body.style.filter = "grayscale(0%)";' });
+
+            });
+
+            isMonochrome = false;
+        }
+    };
 });
 
-  
+
       //alertify.alert('Ready!');
 
 
@@ -64,7 +90,7 @@ $(document).ready(function(){
 // chrome.storage.sync.get('fontScale', function(data){    
 //     fontSize = data.fontScale;
 //   });
-  
+
 
 // fontBigger.onclick = function (element) {
 //     changeFontSize();
