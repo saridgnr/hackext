@@ -226,7 +226,7 @@ $(document).ready(function(){
       monobtn.style.backgroundColor="rgb(247, 184, 31)";
     }
 
-    mouselbl.innerText = "Monochrome: " + options.mouse;
+    monolbl.innerText = "Monochrome: " + options.mono;
   }
 
   mousebtn.onclick = function(event){
