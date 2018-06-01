@@ -47,10 +47,11 @@ $(document).ready(function () {
         }
         if(options.invert){
             invertColors.classList.add('selected');
-            invertColors.style.backgroundColor = "url(images/icons/base-invert.svg)";
+            invertColors.style.backgroundImage="url(images/icons/base-invert.svg)";
         }
         else{
             invertColors.classList.remove('selected');
+            invertColors.style.backgroundColor = "url(images/icons/invert-colors.svg)";
         }
         if(options.mono){
             monochrome.classList.add('selected');
