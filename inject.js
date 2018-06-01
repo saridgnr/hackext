@@ -41,7 +41,7 @@ chrome.tabs.onUpdated.addListener(function () {
             {code: 'document.body.style = "cursor: url(http://www.rw-designer.com/cursor-view/97242-48.png),default;' });
     });}
 
-    if (!options.invert) {
+    if (options.invert) {
         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
             chrome.tabs.executeScript(
                 tabs[0].id,

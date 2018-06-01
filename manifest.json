@@ -4,7 +4,7 @@
     "description": "The extension turns websites to accessible according to your chosen settings.",
     "permissions": ["activeTab", "declarativeContent", "storage", "tabs", "http://*/*", "https://*/*"],
     "background": {
-      "scripts": ["background.js"],
+      "scripts": ["background.js", "inject.js"],
       "persistent": false
     },
     "options_page": "options.html",
