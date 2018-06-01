@@ -183,3 +183,54 @@ label.card-title{
   font-size: 34px;
   margin-left: 20px;
 }
+
+.btn {
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  border-width: 0px;
+  background-color: rgb(239, 239, 239);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.explanation {
+font-size: x-large;
+}
+.btn:hover{
+  background-color: rgb(205, 205, 205);
+  cursor: pointer;
+}
+.btn:active{
+  background-color: rgb(180, 180, 190);
+  outline: none;
+}
+.btn:focus{
+  outline: none;
+}
+
+span.btn-info{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+  span.btn-info>label{
+    margin: auto;
+    font-size: small;
+  }
+  span.btn-info>button{
+    margin: auto;
+  }
+
+  div.option-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+  }
+  
+  div.option-container>div{
+    display: flex;
+    justify-content: space-around;
+  }
