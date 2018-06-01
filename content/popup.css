@@ -3,6 +3,10 @@ body{
 }
 .buttons{
   padding:5px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .btn {
     height: 60px;
@@ -35,7 +39,7 @@ body{
 .btn_container{
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .text_container{

@@ -36,7 +36,7 @@ $(document).ready(function () {
     }
 
     (function initiatePopupButtonDescriptions() {
-        let formatSize = document.getElementById('format-size');
+        let formatSize = document.getElementById('format-size-in');
         let volume = document.getElementById('volume');
         let invert = document.getElementById('invert');
         let profile = document.getElementById('profile');
@@ -61,7 +61,7 @@ $(document).ready(function () {
     })();
 
     $(document).ready(function () {
-        let fontBigger = document.getElementById('format-size');
+        let fontBigger = document.getElementById('format-size-in');
         let invertColors = document.getElementById('invert');
         let monochrome = document.getElementById('monochrome');
 
