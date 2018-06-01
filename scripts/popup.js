@@ -167,3 +167,13 @@ $(document).ready(function () {
         }
     }
 });
+
+let mouseBigger = document.getElementById('cursorbtn');
+let isMouseBig = false;
+mouseBigger.onclick = function() {
+    if(isMouseBig) {
+        isMouseBig = false;
+    } else {
+        isMouseBig = true;
+    }
+}
