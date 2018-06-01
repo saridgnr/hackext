@@ -1,6 +1,5 @@
 var blind, sight, color;
 var options = {
-  format: false,
   volume: false, 
   invert: false, 
   mouse: false,
@@ -15,9 +14,6 @@ chrome.storage.sync.get(['SightLoss'], function(result){
 });
 chrome.storage.sync.get(['ColorBlindness'], function(result){
   color = result.ColorBlindness;
-});
-chrome.storage.sync.get(['formatsize'], function(result){
-  options.format = result.formatsize;
 });
 chrome.storage.sync.get(['volume'], function(result){
   options.volume = result.volume;
@@ -42,8 +38,6 @@ $(document).ready(function(){
   let SightLoss = document.getElementById("SightLoss");
   let ColorBlindness = document.getElementById("ColorBlindness");
   
-  let formatbtn = document.getElementById("formatbtn");
-  let formatlbl = document.getElementById("formatlbl");
   let volumebtn = document.getElementById("volumebtn");
   let volumelbl = document.getElementById("volumelbl");
   let invertbtn = document.getElementById("invertbtn");
@@ -60,7 +54,6 @@ $(document).ready(function(){
   ColorBlindness.disabled = true;
   savebutton.hidden = true;
   editPage.hidden = false;
-  formatbtn.disabled = true;
   volumebtn.disabled = true;
   invertbtn.disabled = true;
   monobtn.disabled = true;
@@ -71,7 +64,6 @@ $(document).ready(function(){
   SightLoss.checked = sight;
   ColorBlindness.checked = color;
 
-  formatlbl.innerText="Text Size: " + options.format;
   volumelbl.innerText = "Read Content: " + options.volume;
   invertlbl.innerText = "Invert Colors: " + options.invert;
   monolbl.innerText = "Monochrome: " + options.mono;
@@ -100,7 +92,6 @@ $(document).ready(function(){
     chrome.storage.sync.set({'blindness': blindness.checked});
     chrome.storage.sync.set({'SightLoss': SightLoss.checked});
     chrome.storage.sync.set({'ColorBlindness': ColorBlindness.checked});
-    chrome.storage.sync.set({'formatsize': options.formatsize});
     chrome.storage.sync.set({'volume': options.volume});
     chrome.storage.sync.set({'invert': options.invert});
     chrome.storage.sync.set({'mouse': options.mouse});
@@ -124,15 +115,12 @@ $(document).ready(function(){
 
   SightLoss.onclick = function(event){
     if(SightLoss.checked){
-      options.formatsize = true;
       options.cursorSize = true;
     }
     else{
-      options.formatsize = false;
       options.cursorSize = false;
     }
 
-    formatlbl.innerText="Text Size: " + options.formatsize;
     cursorlbl.innerText = "Enlarge Cursor: " + options.cursorSize;
   }
 
