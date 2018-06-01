@@ -1,5 +1,6 @@
 var fontSize = 1;
 var options = {
+    info: true,
     volume: false,
     invert: false,
     mouse: false,
@@ -32,66 +33,99 @@ $(document).ready(function () {
     let monochrome = document.getElementById('monochrome');
     let profileBtn = document.getElementById('profile');
     let mouse = document.getElementById('mouse');
+    let volume = document.getElementById('volume');
+    let info = document.getElementById('info');
+    let cursor = document.getElementById('cursorbtn');
 
+    let displayedTextBox = document.getElementById("info_text");
+
+    findActiveButtons();
+    
+    function findActiveButtons(){
+        if(options.info){
+            info.classList.add('selected');
+        }
+        if(options.cursor){
+            cursor.classList.add('selected');
+        }
+        if(options.invert){
+            invertColors.classList.add('selected');
+            invertColors.style.backgroundColor = "url(images/icons/base-invert.svg)";
+        }
+        if(options.mono){
+            monochrome.classList.add('selected');
+        }
+        if(options.mouse){
+            mouse.classList.add('selected');
+        }
+        if(options.volume){
+            volume.classList.add('selected');
+            volume.style.backgroundImage = "url(images/icons/volume.svg)";
+        }   
+    }
     // Toggles the descrition for the extension's buttons on and off
     function toggleDesc() {
         let x = document.getElementById("description");
-        if (x.style.display === "none") {
+        options.info = !options.info;
+        if (!options.info) {
             x.style.display = "block";
+            info.classList.add('selected');
+
         } else {
             x.style.display = "none";
+            info.classList.remove('selected');
         }
     }
 
     // The descriptions for eah of the buttons in the extension 
     const descriptions = {
-        textSizeMessage: "Change the size of the text according to your selection",
+        zoominMessage: "Increase the size of the text according to your selection",
+        zoomoutMessage: "Decrease the size of the text according to your selection",
         ReadContentMessage: "Get your auditory output devices to read the highlighted text",
         invertColorsMessage: "Invert the colors to see the sites better",
-        profileMessage: "Define your personal profile of all our available features",
+        profileMessage: "Define your personal profile and chose your default settings",
         informationMessage: "Get all of the neccessary information about our extension",
         mouseVibrationMessage: "Get your mouse to vibrate with the arduino component" +
-            " whenever you mouse over a clickable object"
-
+            " whenever you mouse is over a clickable object",
+        monoMessage: "Get the site's content in grayscale",
+        cursorMessage: "Enlarge the cursor inorder to see it better"
     };
 
-
-    function displayInfo(messageName) {
-        let displayedTextBox = document.getElementById("info_text");
+    function displayInfo(messageName) { 
         displayedTextBox.innerText = descriptions[messageName];
     }
 
     function deleteDescriptiion() {
-        let displayedTextBox = document.getElementById("info_text");
         displayedTextBox.innerText = "Hover for description!";
     }
 
     (function initiatePopupButtonDescriptions() {
-        let formatSize = document.getElementById('format-size-in');
-        let volume = document.getElementById('volume');
-        let invert = document.getElementById('invert');
-        let profile = document.getElementById('profile');
-        let mouse = document.getElementById('mouse');
-        let info = document.getElementById('info');
-
-        formatSize.onmouseenter = (function () { displayInfo('textSizeMessage') });
+        fontBigger.onmouseenter = (function () { displayInfo('zoominMessage') });
+        fontSmaller.onmouseenter = (function () { displayInfo('zoomoutMessage') });
         volume.onmouseenter = (function () { displayInfo('ReadContentMessage') });
-        invert.onmouseenter = (function () { displayInfo('invertColorsMessage') });
-        profile.onmouseenter = (function () { displayInfo('profileMessage') });
+        invertColors.onmouseenter = (function () { displayInfo('invertColorsMessage') });
+        monochrome.onmouseenter = (function () {displayInfo('monoMessage')});
+        profileBtn.onmouseenter = (function () { displayInfo('profileMessage') });
         mouse.onmouseenter = (function () { displayInfo('mouseVibrationMessage') });
         info.onmouseenter = (function () { displayInfo('informationMessage') });
+        cursor.onmouseenter = (function () {displayInfo('cursorMessage')});
 
-        formatSize.onmouseleave = (function () { deleteDescriptiion() });
+        cursor.onmouseleave = (function () {deleteDescriptiion()});
+        monochrome.onmouseleave = (function () { deleteDescriptiion()});
+        fontBigger.onmouseleave = (function () { deleteDescriptiion() });
+        fontSmaller.onmouseleave = (function(){deleteDescriptiion()});
         volume.onmouseleave = (function () { deleteDescriptiion() });
-        invert.onmouseleave = (function () { deleteDescriptiion() });
-        profile.onmouseleave = (function () { deleteDescriptiion() });
+        invertColors.onmouseleave = (function () { deleteDescriptiion() });
+        profileBtn.onmouseleave = (function () { deleteDescriptiion() });
         mouse.onmouseleave = (function () { deleteDescriptiion() });
         info.onmouseleave = (function () { deleteDescriptiion() });
 
-        info.onclick = function () { toggleDesc() };
+        info.onclick = function () { toggleDesc(); };
     })();
 
     mouse.onclick = function (element) {
+
+
         $("button").each(function () {
             $(this).hover(function () {
                 $.get("http://jsonapi.org/examples/", function (data, status) {
@@ -152,9 +186,9 @@ $(document).ready(function () {
                 chrome.tabs.executeScript(
                     tabs[0].id,
                     { code: 'document.body.style.filter = "invert(100%)";' });
-
             });
-
+            invertColors.classList.add('selected');
+            invertColors.style.backgroundImage="url(images/icons/base-invert.svg)";
             options.invert = true;
         }
         else {
@@ -164,7 +198,8 @@ $(document).ready(function () {
                     { code: 'document.body.style.filter = "invert(0%)";' });
 
             });
-
+            invertColors.classList.remove('selected');
+            invertColors.style.backgroundImage="url(images/icons/invert.svg)";
             options.invert = false;
         }
     };
@@ -180,9 +215,8 @@ $(document).ready(function () {
                 chrome.tabs.executeScript(
                     tabs[0].id,
                     { code: 'document.body.style.filter = "grayscale(100%)";' });
-
             });
-
+            monochrome.classList.remove('selected');
             options.mono = false;
         }
         else {
@@ -190,10 +224,32 @@ $(document).ready(function () {
                 chrome.tabs.executeScript(
                     tabs[0].id,
                     { code: 'document.body.style.filter = "grayscale(0%)";' });
-
             });
 
+            monochrome.classList.add('selected');
             options.mono = true;
+        }
+    }
+
+    volume.onclick = function(element){
+        options.volume = !options.volume;
+        if(options.volume){
+            volume.classList.add('selected');
+            volume.style.backgroundImage = "url(images/icons/volume.svg)";
+        }
+        else{
+            volume.classList.remove('selected');
+            volume.style.backgroundImage = "url(images/icons/volume-off.svg)";
+        }
+    }
+
+    mouse.onclick = function(element){
+        options.mouse = !options.mouse;
+        if(options.mouse){
+            mouse.classList.add('selected');
+        }
+        else{
+            mouse.classList.remove('selected');
         }
     }
 });

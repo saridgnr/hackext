@@ -35,6 +35,9 @@ body{
   .btn:focus{
     outline: none;
   }
+  .selected{
+    background-color: rgb(255, 208, 91);
+  }
 
 .btn_container{
   width: 100%;
