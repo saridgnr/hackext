@@ -1,8 +1,9 @@
 body{
-  width: 260px;
-  padding: 5px;
+  width: 330px;
 }
-
+.buttons{
+  padding:5px;
+}
 .btn {
     height: 60px;
     width: 60px;
@@ -13,6 +14,12 @@ body{
     background-position: center;
     background-size: cover;
   }
+
+.explanation {
+  font-size: x-large;
+  padding-left: 1em;
+  padding-right: 0em;
+}
   .btn:hover{
     background-color: rgb(205, 205, 205);
     cursor: pointer;
@@ -24,12 +31,30 @@ body{
   .btn:focus{
     outline: none;
   }
+  .btn:visited{
+    background-color: brown;
+  }
 
 .btn_container{
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 22px;
+}
+
+.text_container{
+  width: 100%;
+  border-radius: 5%;
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  background-color:rgb(242, 242, 242);
+}
+
+.general_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 span.btn-info{
