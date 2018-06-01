@@ -1,7 +1,7 @@
 var fontSize = 1;
 var options = {
-    volume: false, 
-    invert: false, 
+    volume: false,
+    invert: false,
     mouse: false,
     mono: false,
     cursor: false
@@ -24,12 +24,15 @@ $(document).ready(function () {
     // chrome.storage.sync.get(['cursorSize'], function(result){
     //     options.cursor = result.cursorSize;
     // });
-    
+
+
     let fontBigger = document.getElementById('format-size-in');
     let fontSmaller = document.getElementById('format-size-out');
     let invertColors = document.getElementById('invert');
     let monochrome = document.getElementById('monochrome');
     let profileBtn = document.getElementById('profile');
+    let mouse = document.getElementById('mouse');
+
     // Toggles the descrition for the extension's buttons on and off
     function toggleDesc() {
         let x = document.getElementById("description");
@@ -51,6 +54,7 @@ $(document).ready(function () {
             " whenever you mouse over a clickable object"
 
     };
+
 
     function displayInfo(messageName) {
         let displayedTextBox = document.getElementById("info_text");
@@ -87,6 +91,34 @@ $(document).ready(function () {
         info.onclick = function () { toggleDesc() };
     })();
 
+    mouse.onclick = function (element) {
+        $("button").each(function () {
+            $(this).hover(function () {
+                $.get("http://jsonapi.org/examples/", function (data, status) {
+                    console.log(data);
+                });
+            });
+        });
+
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {
+                    code: `let allbuttons = document.getElementsByTagName("a");
+
+            for (var i=0, max = allbuttons.length; i < max; i++)  {
+                 allbuttons[i].addEventListener("mouseover",function () {
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', "https://ipinfo.io/json", true);
+                    xhr.send();
+                    console.log(xhr);
+                    
+                   });
+            }`});
+
+        });
+    }
 
     fontBigger.onclick = function (element) {
         fontSize += 0.2;
@@ -142,7 +174,7 @@ $(document).ready(function () {
         mono(element);
     };
 
-    function mono(element){
+    function mono(element) {
         if (options.mono) {
             chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                 chrome.tabs.executeScript(
