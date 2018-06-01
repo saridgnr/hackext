@@ -28,7 +28,7 @@ chrome.storage.sync.get(['mouse'], function(result){
   options.mouse = result.mouse;
 });
 chrome.storage.sync.get(['cursorSize'], function(result){
-  cursor = result.cursorSize;
+  options.cursor = result.cursorSize;
 });
 
 $(document).ready(function(){
@@ -70,6 +70,28 @@ $(document).ready(function(){
   mouselbl.innerText = "Mouse Vibration: " + options.mouse;
   cursorlbl.innerText = "Enlarge Cursor: " + options.cursor;
 
+  if(options.volume){
+    volumebtn.style.backgroundImage="url('images/icons/volume.svg')";
+    volumebtn.style.backgroundColor="rgb(247, 184, 31)";
+  }
+
+  if(options.invert){
+    invertbtn.style.backgroundImage="url('images/icons/base-invert.svg')";
+    invertbtn.style.backgroundImage="rgb(247, 184, 31)";
+  }
+
+  if(options.mono){
+    monobtn.style.backgroundColor="rgb(247, 184, 31)";
+  }
+
+  if(options.mouse){
+    mousebtn.style.backgroundColor="rgb(247, 184, 31)";
+  }
+
+  if(options.cursor){
+    cursorbtn.style.backgroundColor="rgb(247, 184, 31)";
+  }
+
   editPage.onclick = function(element){
     blindness.disabled = false;
     SightLoss.disabled = false;
@@ -77,6 +99,18 @@ $(document).ready(function(){
 
     savebutton.hidden = false;
     editPage.hidden = true;
+
+    invertbtn.disabled = false;
+    monobtn.disabled = false;
+    cursorbtn.disabled = false;
+    mousebtn.disabled = false;
+    volumebtn.disabled = false;
+
+    invertbtn.classList.add('edited');
+    monobtn.classList.add('edited');
+    cursorbtn.classList.add('edited');
+    mousebtn.classList.add('edited');
+    volumebtn.classList.add('edited');  
   };
 
   savebutton.onclick = function(element){
@@ -87,8 +121,18 @@ $(document).ready(function(){
     savebutton.hidden = true;
     editPage.hidden = false;
     
-    invertlbl.innerText = "Invert Colors: " + options.invert;
-    
+    invertbtn.disabled = true;
+    monobtn.disabled = true;
+    cursorbtn.disabled = true;
+    mousebtn.disabled = true;
+    volumebtn.disabled = true;
+
+    invertbtn.classList.remove('edited');
+    monobtn.classList.remove('edited');
+    cursorbtn.classList.remove('edited');
+    mousebtn.classList.remove('edited');
+    volumebtn.classList.remove('edited');  
+
     chrome.storage.sync.set({'blindness': blindness.checked});
     chrome.storage.sync.set({'SightLoss': SightLoss.checked});
     chrome.storage.sync.set({'ColorBlindness': ColorBlindness.checked});
@@ -96,17 +140,23 @@ $(document).ready(function(){
     chrome.storage.sync.set({'invert': options.invert});
     chrome.storage.sync.set({'mouse': options.mouse});
     chrome.storage.sync.set({'monochrome': options.monochrome});
-    chrome.storage.sync.set({'cursorSize': options.cursorSize});
+    chrome.storage.sync.set({'cursorSize': options.cursor});
   }
 
   blindness.onclick = function(event){
     if (blindness.checked){
       options.volume = true;
+      volumebtn.style.backgroundImage="url('images/icons/volume.svg')";
+      volumebtn.style.backgroundColor="rgb(247, 184, 31)"
       options.mouse = true;
+      mousebtn.style.backgroundColor="rgb(247, 184, 31)";
     }
     else{
       options.volume = false;
+      volumebtn.style.backgroundImage="url('images/icons/volume-off.svg')";
+      volumebtn.style.backgroundColor="rgb(239, 239, 239)";
       options.mouse = false;
+      mousebtn.style.backgroundColor="rgb(239, 239, 239)";
     }
 
     mouselbl.innerText = "Mouse Vibration: " + options.mouse;
@@ -115,23 +165,87 @@ $(document).ready(function(){
 
   SightLoss.onclick = function(event){
     if(SightLoss.checked){
-      options.cursorSize = true;
+      options.cursor = true;
+      cursorbtn.style.backgroundColor="rgb(247, 184, 31)";
     }
     else{
-      options.cursorSize = false;
+      options.cursor = false;
+      cursorbtn.style.backgroundColor="rgb(239, 239, 239)";
     }
 
-    cursorlbl.innerText = "Enlarge Cursor: " + options.cursorSize;
+    cursorlbl.innerText = "Enlarge Cursor: " + options.cursor;
   }
 
   ColorBlindness.onclick = function(event){
     if(ColorBlindness.checked){
       options.monochrome = true;
+      monobtn.style.backgroundColor="rgb(247, 184, 31)";
     }
     else{
       options.monochrome = false;
+      monobtn.style.backgroundColor="rgb(239, 239, 239)";
     }
 
     monolbl.innerText = "Monochrome: " + options.monochrome;
+  }
+
+  volumebtn.onclick = function(event){
+    options.volume = !options.volume;
+    if (!options.volume){
+      volumebtn.style.backgroundColor="rgb(239, 239, 239)";
+    }
+    else{
+      volumebtn.style.backgroundColor="rgb(247, 184, 31)";
+    }
+
+    volumelbl.innerText = "Read Content: " + options.volume;
+  }
+
+  invertbtn.onclick = function(event){
+    options.invert = !options.invert;
+    if(!options.invert){
+      invertbtn.style.backgroundColor="rgb(239, 239, 239)";
+    }
+    else{
+      invertbtn.style.backgroundColor="rgb(247, 184, 31)";
+    }
+
+    invertlbl.innerText = "Invert Colors: " + options.invert;
+  }
+
+  monobtn.onclick = function(event){
+    options.mono = !options.mono;
+    if(!options.mono){
+      monobtn.style.backgroundColor="rgb(239, 239, 239)";
+    }
+    else{
+      monobtn.style.backgroundColor="rgb(247, 184, 31)";
+    }
+
+    mouselbl.innerText = "Monochrome: " + options.mouse;
+  }
+
+  mousebtn.onclick = function(event){
+    options.mouse = !options.mouse;
+    if(!options.mouse){
+      mousebtn.style.backgroundColor="rgb(239, 239, 239)";
+    }
+    else{
+      mousebtn.style.backgroundColor="rgb(247, 184, 31)";
+    }
+
+    mouselbl.innerText = "Mouse Vibration: " + options.mouse;
+  }
+
+  cursorbtn.onclick = function(event){
+    options.cursor = !options.cursor;
+    if(!options.cursor){
+      cursorbtn.style.backgroundColor="rgb(239, 239, 239)";
+    }
+    else{
+      cursorbtn.style.backgroundColor="rgb(247, 184, 31)";
+    }
+
+    cursorlbl.innerText = "Enlarge Cursor: " + options.cursor;
   }
 });

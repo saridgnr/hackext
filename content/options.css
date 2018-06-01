@@ -198,11 +198,11 @@ label.card-title{
 .explanation {
 font-size: x-large;
 }
-.btn:hover{
+.edited:hover{
   background-color: rgb(205, 205, 205);
   cursor: pointer;
 }
-.btn:active{
+.edited:active{
   background-color: rgb(180, 180, 190);
   outline: none;
 }
